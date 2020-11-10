@@ -61,14 +61,14 @@ export default function Marcacao(props){
 
 
     return(
-        <div>
+        <div style={{ position:'absolute', zIndex:`${numero}`}}>
         <Modal isOpen={modal} toggle={tModal} >
             <ModalHeader toggle={tModal}>Comentário</ModalHeader>
             <ModalBody>
                 <Input type="textarea" value={texto} onChange={e => setTexto(e.target.value)} />
             </ModalBody>            
         </Modal>            
-        <Draggable defaultPosition={{x: 100, y: -600}} id={props.pId} >
+        <Draggable defaultPosition={{x: 50, y: 50}} id={props.pId} >
             
                 <Resizable
                     className="item"
@@ -76,7 +76,7 @@ export default function Marcacao(props){
                         width:100,
                         height:100
                       }}
-                    style={{ backgroundColor: getCorPorMarcacao(marcacao)}}
+                    style={{ backgroundColor: getCorPorMarcacao(marcacao) }}
                 >
                     <div >                                           
                         <Dropdown isOpen={dropdownOpen} toggle={tDropdow}>

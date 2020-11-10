@@ -32,3 +32,7 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+  .sidenave .btn-side {
+    margin-top: 20px;
+  }
