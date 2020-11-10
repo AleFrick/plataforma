@@ -8,8 +8,9 @@ export default function aSidebar(props){
     return (
         <div class="sidenav">
                 
-            <Button onClick={props.click}>+ Marcações</Button>
-    
+            <Button  style={{width:'150px'}} onClick={props.clickMarcacao}>+ Marcações</Button>    
+                  
+            <Button  style={{marginTop:'10px', width:'150px'}} onClick={props.clickApontar}>+ Apontações</Button>                                 
         </div>
         );
 }
