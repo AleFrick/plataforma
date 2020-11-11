@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import ReactDom from 'react-dom'
 import {Row, Col} from 'reactstrap'
 
 import Marcacao from '../../components/Marcacao/Marcacao'
@@ -20,6 +21,8 @@ export default function Correcoes(){
         setApontador([...iApontador,'1'])
     }
 
+    
+
     return(
         <div>  
             <Row>
@@ -31,9 +34,18 @@ export default function Correcoes(){
                     
                     <img style={{position:'absolute', zIndex:'-1', left:'0px', top:'0px'}} src='https://image.slidesharecdn.com/7anoomelhortextodomundodostimoanoderecuperao-171129192230/95/7-ano-o-melhor-texto-do-mundo-do-stimo-ano-de-recuperao-1-638.jpg?cb=1511983379' />                                           
                     
-                        {iMarcador.map((iMarcador, i) => <Marcacao key={`marcacao_${i}`}  numero='1' marcacao='S' key={`marc_${i}`} />)}    
+                    {iMarcador.map((iMarcador, i) => <Marcacao key={`marcacao_${i}`} 
+                                                               id={`marcacao_${i}`} 
+                                                               numero='1' 
+                                                               marcacao='S' 
+                    />)}    
                                                    
-                     {iApontador.map((iApontador, i) => <Apontar key={`marcacao_${i}`}  numero='1' marcacao='S' key={`marc_${i}`} />)}
+                    {iApontador.map((iApontador, i) => <Apontar key={`apontador_${i}`} 
+                                                                id={`apontador_${i}`} 
+                                                                numero='1' 
+                                                                marcacao='S'
+                                                                
+                    />)}
                 </Col>
             </Row>
         </div>
