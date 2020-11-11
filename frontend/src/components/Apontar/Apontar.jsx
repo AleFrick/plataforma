@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactDOM, { unmountComponentAtNode } from 'react-dom'
 import { 
             Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
             Modal, ModalHeader, ModalBody, Input
@@ -29,9 +30,13 @@ export default function Apontar(props){
  const [modal, setModal] = useState(false);
  const tModal = () => setModal(!modal);
  const [texto, setTexto] = useState('')
+
+ function excluir(value){    
+    document.getElementById(value).remove()
+ }
  
  return(
-     <div style={{ position:'absolute', zIndex:`${numero}`}}>
+     <div id={props.id} style={{ position:'absolute', zIndex:`${numero}`}}>
      <Modal isOpen={modal} toggle={tModal} >
          <ModalHeader toggle={tModal}>Comentário</ModalHeader>
          <ModalBody>
@@ -43,8 +48,8 @@ export default function Apontar(props){
              <Resizable
                  className="item"
                  defaultSize={{
-                     width:100,
-                     height:100
+                     width:70,
+                     height:40
                    }}
                  style={{ background:'rgb(252, 255, 240,0.5)', borderColor: corBorda, borderStyle:'dashed' }}
              >
@@ -64,7 +69,9 @@ export default function Apontar(props){
                              <DropdownItem onClick={e=> setCorBorda(verde)}>verde</DropdownItem>                                                                                                                                                                                                                                         
                              <DropdownItem onClick={e=> setCorBorda(vermelho)}>Vermelho</DropdownItem>                                                                                                                                                                                                                                         
                              <DropdownItem onClick={e=> setCorBorda(laranja)}>Laranja</DropdownItem>                                                                                                                                                                                                                                         
-                             <DropdownItem onClick={e=> setCorBorda(lilas)}>Lilas</DropdownItem>                                                                                                                                                                                                                                         
+                             <DropdownItem onClick={e=> setCorBorda(lilas)}>Lilas</DropdownItem>
+                             <DropdownItem divider />                                                                                                                                                                                                                                         
+                             <DropdownItem onClick={e => excluir(props.id)}>Remover</DropdownItem>                                                                                                                                                                                                                                         
                          </DropdownMenu>
                      </Dropdown>                                                 
                  </div>

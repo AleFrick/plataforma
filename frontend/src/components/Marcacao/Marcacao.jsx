@@ -3,6 +3,7 @@ import {
             Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
             Modal, ModalHeader, ModalBody, Input
        } from 'reactstrap'
+import ReactDom from 'react-dom'
 import Draggable from 'react-draggable';
 import { Resizable }  from 're-resizable'
 
@@ -59,23 +60,26 @@ export default function Marcacao(props){
         }
     }
 
+    function excluir(value) {        
+        document.getElementById(value).remove()
+    }
 
     return(
-        <div style={{ position:'absolute', zIndex:`${numero}`}}>
-        <Modal isOpen={modal} toggle={tModal} >
-            <ModalHeader toggle={tModal}>Comentário</ModalHeader>
-            <ModalBody>
-                <Input type="textarea" value={texto} onChange={e => setTexto(e.target.value)} />
-            </ModalBody>            
-        </Modal>            
-        <Draggable defaultPosition={{x: 50, y: 50}} id={props.pId} >
-            
+        <div id={props.id} style={{ position:'absolute', zIndex:`${numero}`}}>
+            <Modal isOpen={modal} toggle={tModal} >
+                <ModalHeader toggle={tModal}>Comentário</ModalHeader>
+                <ModalBody>
+                    <Input type="textarea" value={texto} onChange={e => setTexto(e.target.value)} />
+                </ModalBody>            
+            </Modal>            
+            <Draggable defaultPosition={{x: 50, y: 50}} id={props.pId} >
+                
                 <Resizable
                     className="item"
                     defaultSize={{
                         width:100,
                         height:100
-                      }}
+                    }}
                     style={{ backgroundColor: getCorPorMarcacao(marcacao) }}
                 >
                     <div >                                           
@@ -88,7 +92,7 @@ export default function Marcacao(props){
                             >
                                 {marcacao} {numero} <FontAwesomeIcon icon={faCog} />  
                             </DropdownToggle>
-                             
+                            
                             <DropdownMenu>
                                 <DropdownItem onClick={e=> tModal()}>Comentário</DropdownItem>   
                                 <DropdownItem divider />
@@ -96,14 +100,16 @@ export default function Marcacao(props){
                                 <DropdownItem onClick={e=> setMarcacao('S')}>Semântica</DropdownItem>                                
                                 <DropdownItem onClick={e=> setMarcacao('R')}>Regência</DropdownItem>                                                                                                                                                             
                                 <DropdownItem onClick={e=> setMarcacao('C')}>Concordância</DropdownItem>                                                                                                                                                             
-                                <DropdownItem onClick={e=> setMarcacao('G')}>Geral</DropdownItem>                                                                                                                                                                                                                 
+                                <DropdownItem onClick={e=> setMarcacao('G')}>Geral</DropdownItem> 
+                                <DropdownItem divider />
+                                <DropdownItem onClick={e => excluir(props.id)}>Remover</DropdownItem> 
                             </DropdownMenu>
                         </Dropdown>                                                 
                     </div>
-                 
+                
                     
                 </Resizable>    
-     
+        
             </Draggable>
         </div>
     )
