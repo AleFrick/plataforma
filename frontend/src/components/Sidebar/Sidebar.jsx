@@ -10,7 +10,7 @@ export default function aSidebar(props){
                 
             <Button  style={{width:'150px'}} onClick={props.clickMarcacao}>+ Marcações</Button>    
                   
-            <Button  style={{marginTop:'10px', width:'150px'}} onClick={props.clickApontar}>+ Apontações</Button>                                 
+            <Button  style={{marginTop:'10px', width:'150px'}} onClick={props.clickApontar}>+ Apontações</Button>                                                                             
         </div>
         );
 }
