@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import ReactDom from 'react-dom'
 import {Row, Col} from 'reactstrap'
 
@@ -9,7 +9,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 
 
 
-export default function Correcoes(){
+export default function Correcoes(props){
     const [iMarcador, setMarcador] = useState([])
     const [iApontador, setApontador] = useState([])
 
@@ -21,8 +21,15 @@ export default function Correcoes(){
         setApontador([...iApontador,'1'])
     }
 
-    
-
+    useEffect(() =>{        
+        if(sessionStorage.getItem('@nome-do-app/isLogged') === 'false' ){
+            
+                window.location.href = '/login'  
+           
+            
+        }
+    })
+ 
     return(
         <div>  
             <Row>
