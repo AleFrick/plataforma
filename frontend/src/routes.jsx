@@ -14,7 +14,7 @@ export default function Routes(){
         
           <BrowserRouter>
                 <Switch>
-                    <Route path="/" component={isLogged === true && Correcao || isLogged === false && Login} exact={true} />    
+                    <Route path="/" component={Correcao} exact={true} />    
                     <Route path="/teste" component={Teste}  />    
                     <Route path="/login" render={(props) => <Login /> }  />    
                 </Switch>

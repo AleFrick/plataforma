@@ -4,14 +4,13 @@ import FrmLogin from '../../components/FrmLogin/FrmLogin'
 
 
 export default function Login(props){
-    
+             
     return (
-        <div  >
-            <Button onClick={e => props.click()} >teste</Button>
+        <div  >            
             <Row >
                 <Col sm={4}></Col>
                 <Col sm={4}>
-                    <FrmLogin click={e => props.click()} />
+                    <FrmLogin />
                 </Col>
                 <Col sm={4}></Col>
             </Row>
