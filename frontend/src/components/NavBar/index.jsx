@@ -15,9 +15,11 @@ import {
   NavbarText, Input, Form, Button
 } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { IsLogged, setLogin, RemoveToken } from '../../js/aux_token'
 import { typeMsg, notificacao } from '../../js/msg'
+import FrmLogin from '../FrmLogin'
 
 
 export default function NavBar (props) {
@@ -43,7 +45,7 @@ export default function NavBar (props) {
   function pressEnter(e){        
     if(e.key === 'Enter'){
         if(user.trim() === '' || pass.trim() === ''){
-            notificacao('Informe o usuário e a senha', typeMsg.warn, toast)
+            notificacao('🙃 Informe o usuário e a senha', typeMsg.warn, toast)
         }else{
             login()
         }            
@@ -68,7 +70,7 @@ function CamposLogin(props){
         <Button className="btn my-2 my-sm-0" outline color='success' 
           onClick={e => login()}
         >Login</Button>
-      </Form>
+    </Form> 
     )
   }else{    
     return (
@@ -106,11 +108,17 @@ return (
             </NavItem>
             
           </Nav>
-          
-          <CamposLogin /> 
+          <FrmLogin 
+            user={user} setUser={e => setUser(e.target.value)}
+            pressEnter={e => pressEnter(e)} 
+            pass={pass} setPass={e => setPass(e.target.value)}   
+            loginClick={e => login()}         
+          /> 
+          {/* <CamposLogin />  */}
          
         </Collapse>
-      </Navbar>
+        
+      </Navbar>    
     </div>
   );
 }

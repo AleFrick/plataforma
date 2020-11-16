@@ -1,7 +1,6 @@
 import React from 'react'
 import {Col, Row, Button} from 'reactstrap'
 
-import FrmLogin from '../../components/FrmLogin/FrmLogin'
 import NavBar from '../../components/NavBar'
 
 
