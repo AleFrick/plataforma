@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import Marcacao from '../../components/Marcacao/Marcacao'
 import Apontar from '../../components/Apontar/Apontar'
 import Sidebar from '../../components/Sidebar'
+import { RemoveToken } from '../../js/aux_token.js'
 
 
 
@@ -23,7 +24,8 @@ export default function Correcoes({history}){
     }
 
     function handleLogout() {       
-        localStorage.removeItem('@SuaAplicacao:JWT_TOKEN');    
+        //localStorage.removeItem('@SuaAplicacao:JWT_TOKEN');    
+        RemoveToken();
         history.push('/');
     }
     return(
