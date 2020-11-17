@@ -12,7 +12,7 @@ function RouteWrapper({
   //if (!authenticated && isPrivate) return <Redirect to={redirectTo} />; 
 
   const authenticated = IsLogged();
-  if (authenticated && isPrivate) return <Redirect to={redirectTo} />; 
+  if (!authenticated && isPrivate) return <Redirect to={redirectTo} />; 
 
   return <Route {...rest} render={props => <Component {...props} />} />;
 }

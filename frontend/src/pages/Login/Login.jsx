@@ -5,10 +5,10 @@ import NavBar from '../../components/NavBar'
 
 
 export default function Login(props){
-             
+                 
     return (
         <div  >   
-            <NavBar/>  
+            <NavBar  />  
             <Row >
                 <Col sm={4}></Col>
                 <Col sm={4}>

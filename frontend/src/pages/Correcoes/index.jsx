@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import ReactDom from 'react-dom'
 import {Row, Col} from 'reactstrap'
 
+
 import Marcacao from '../../components/Marcacao'
 import Apontar from '../../components/Apontar/Apontar'
 import Sidebar from '../../components/Sidebar/Sidebar'
+import NavBar from '../../components/NavBar'
 
 
 
@@ -29,6 +31,7 @@ export default function Correcoes(props){
     }
     return(
         <div>  
+            <NavBar  />            
             <Row>
                 <Col xs={2} id="sidebar-wrapper">      
                     <Sidebar clickMarcacao={e => criaMarcacao()} clickApontar={e => criaApontador()} clickSair={e => handleLogout()} />   
