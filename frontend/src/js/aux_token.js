@@ -6,7 +6,7 @@ function setLogin(token){
 }
 
 function IsLogged(){
-    return !localStorage.getItem(TOKEN_APP);
+    return !!localStorage.getItem(TOKEN_APP);
 }
 
 function RemoveToken(){

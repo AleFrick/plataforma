@@ -28,97 +28,100 @@ export default function NavBar (props) {
   const [isOpen, setIsOpen] = useState(false);
   const [pass, setPass] = useState('')  
   const [user, setUser] = useState('')
+  const [userLogName, setUserLogName] = useState()
   const [USUARIO]  = useState('admin')
   const [SENHA]  = useState('bobariga')
 
   const toggle = () => setIsOpen(!isOpen);
 
-  function login(){
-    if(user === USUARIO && pass === SENHA){
+  function login(nome, senha){       
+    
+    if(nome === USUARIO && senha === SENHA){      
       setLogin('admin')
+      setUserLogName('Admin')         
       history.push('/correcoes')
     }else{
       notificacao('😣 Usuário ou Senha estão inválidos',  typeMsg.warn, toast)
     }
   }
   
-  function pressEnter(e){        
+  function pressEnter(e, nome, senha){        
     if(e.key === 'Enter'){
-        if(user.trim() === '' || pass.trim() === ''){
+        if(nome === '' || senha === ''){
             notificacao('🙃 Informe o usuário e a senha', typeMsg.warn, toast)
         }else{
-            login()
+            login(nome, senha)
         }            
     }        
 }
 
+/* CAMPOS PARA LOGIN OU LOGOUT */
 function CamposLogin(props){      
-  if(stLogin === true){    
+  const [user, setUser] = useState()
+  const [pass, setPass] = useState()
+  const [userLogName] = useState(props.nameShow)
+
+  if(IsLogged() === false){    
     return (
         <Form className="form-inline my-2 my-lg-0">
         <Input className="form-control mr-sm-2" 
               value={user} onChange={e => setUser(e.target.value)} 
               type="mail" placeholder="Usuário" 
               aria-label="Usuário" 
-              onKeyPress={e => pressEnter(e) }
+              onKeyPress={e => pressEnter(e, user, pass )}
         />
         <Input className="form-control mr-sm-2" 
               value={pass} onChange={e => setPass(e.target.value)} 
               type="password" placeholder="Senha" aria-label="Senha" 
-              onKeyPress={e => pressEnter(e) }
+              onKeyPress={e => pressEnter(e, user, pass) }
         />
         <Button className="btn my-2 my-sm-0" outline color='success' 
-          onClick={e => login()}
+          onClick={e => login(user, pass)}
         >Login</Button>
     </Form> 
     )
   }else{    
-    return (
+    return (      
       <Form className="form-inline my-2 my-lg-0">        
-        Bem vindo admin           
+        <span style={{marginRight:'10px'}}> Bem vindo {userLogName} </span>
         <Button className="btn my-2 my-sm-0" 
-                onClick={ e => logOut } 
-                outline color='success' 
+                onClick={ e => logOut() } 
+                outline color='danger'                 
         >Sair</Button>        
       </Form>
     )
   }
 }
 
-function logOut(){
+function logOut(){  
   RemoveToken();
-  history.push('/')
-  setLogin(IsLogged)
+  setUserLogName('')
+  history.push('/')  
 }
 
 return (
-    <div>
+
+    <div style={{zIndex:'0', position:'fixed', width:'100%'}}>      {/* VER PARA NAO CONFLITAR COM COMPONENTE Z-INDEX */}
       <ToastContainer />   
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light  expand="md" >
         <NavbarBrand href="/">EntreLinhas</NavbarBrand> {/* COLOCARO CAMINHO DEPOIS */}
         
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar> 
             <NavItem>
-              <NavLink href="/">Sobre</NavLink> {/* COLOCARO CAMINHO DEPOIS */}
+              <NavLink href="/correcoes">Sobre</NavLink> {/* COLOCARO CAMINHO DEPOIS */}
             </NavItem>
             <NavItem>
-              <NavLink href="/">Planos</NavLink> {/* COLOCARO CAMINHO DEPOIS */}
+              <NavLink href="/correcoes">Planos</NavLink> {/* COLOCARO CAMINHO DEPOIS */}
             </NavItem>
             
           </Nav>
-          <FrmLogin 
-            user={user} setUser={e => setUser(e.target.value)}
-            pressEnter={e => pressEnter(e)} 
-            pass={pass} setPass={e => setPass(e.target.value)}   
-            loginClick={e => login()}         
-          /> 
-          {/* <CamposLogin />  */}
+          <CamposLogin  nameShow={userLogName} /> 
          
         </Collapse>
         
-      </Navbar>    
+      </Navbar>          
     </div>
   );
 }
