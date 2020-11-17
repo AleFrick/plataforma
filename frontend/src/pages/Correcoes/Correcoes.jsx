@@ -3,10 +3,12 @@ import ReactDom from 'react-dom'
 import {Row, Col} from 'reactstrap'
 import { useHistory } from 'react-router-dom'
 
+import NavBar from '../../components/NavBar'
 import Marcacao from '../../components/Marcacao/Marcacao'
 import Apontar from '../../components/Apontar/Apontar'
 import Sidebar from '../../components/Sidebar'
 import { RemoveToken } from '../../js/aux_token.js'
+
 
 
 
@@ -29,7 +31,8 @@ export default function Correcoes({history}){
         history.push('/');
     }
     return(
-        <div>              
+        <div>  
+            <NavBar />                          
             <Row>
                 <Col xs={2} id="sidebar-wrapper">      
                     <Sidebar clickMarcacao={e => criaMarcacao()} clickApontar={e => criaApontador()} clickSair={e => handleLogout()}/>   

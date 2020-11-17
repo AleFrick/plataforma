@@ -1,9 +1,23 @@
 import React from 'react'
 import { Input, Form, Button } from 'reactstrap'
+import { IsLoggedBool } from '../../js/aux_token'
 
 export default function FrmLogin(props){
+    
+    function VerificaLogin(props){
+        console.log(IsLoggedBool)
+        if(IsLoggedBool){
+            return (<h1>alex</h1>)
+            
+        }else{        
+            return (<h1> maria </h1>)
+            
+        }
+    }
+
     return(
         <>  
+            
             <Form className="form-inline my-2 my-lg-0">
                 <Input className="form-control mr-sm-2" 
                     value={props.user} onChange={props.setUser}  
@@ -19,6 +33,7 @@ export default function FrmLogin(props){
                 <Button className="btn my-2 my-sm-0" outline color='success' 
                     onClick={props.loginClick}
                 >Login</Button>
+                <VerificaLogin isLogged={props.isLogged} />
             </Form>
         </>
     )

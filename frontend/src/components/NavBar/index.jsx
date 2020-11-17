@@ -14,8 +14,9 @@ import {
   DropdownItem,
   NavbarText, Input, Form, Button
 } from 'reactstrap';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 import { IsLogged, setLogin, RemoveToken } from '../../js/aux_token'
 import { typeMsg, notificacao } from '../../js/msg'
@@ -37,6 +38,7 @@ export default function NavBar (props) {
     if(user === USUARIO && pass === SENHA){
       setLogin('admin')
       history.push('/correcoes')
+      setLogged(IsLogged)
     }else{
       notificacao('😣 Usuário ou Senha estão inválidos',  typeMsg.warn, toast)
     }
@@ -94,7 +96,7 @@ function logOut(){
 return (
     <div>
       <ToastContainer />   
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light expand="md" style={{zIndex:'100', position:'fixed', width:'100%'}}>
         <NavbarBrand href="/">EntreLinhas</NavbarBrand> {/* COLOCARO CAMINHO DEPOIS */}
         
         <NavbarToggler onClick={toggle} />
@@ -109,6 +111,7 @@ return (
             
           </Nav>
           <FrmLogin 
+            isLogged={stLogin}
             user={user} setUser={e => setUser(e.target.value)}
             pressEnter={e => pressEnter(e)} 
             pass={pass} setPass={e => setPass(e.target.value)}   

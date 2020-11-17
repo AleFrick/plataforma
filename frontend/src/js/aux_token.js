@@ -9,9 +9,17 @@ function IsLogged(){
     return !localStorage.getItem(TOKEN_APP);
 }
 
+function IsLoggedBool(){
+    if(localStorage.getItem(TOKEN_APP) !== ''){
+        return true
+    }else{
+        return false
+    }
+}
+
 function RemoveToken(){
     localStorage.removeItem(TOKEN_APP);    
 }
 
 
-export { TOKEN_APP, setLogin, IsLogged, RemoveToken }
+export { TOKEN_APP, setLogin, IsLogged, RemoveToken, IsLoggedBool }
