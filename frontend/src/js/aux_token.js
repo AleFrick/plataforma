@@ -25,6 +25,20 @@ function toDateTime(value){
     return {date:formaDate, hora:formattedTime}
 }
 
+async function sha256(value) {
+    // encode as UTF-8
+    const msgBuffer = new TextEncoder().encode(value);                    
+
+    // hash the value
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+    // convert ArrayBuffer to Array
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // convert bytes to hex string                  
+    const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+    return hashHex;
+}
 
 function setLogin(token){ 
     let date = Date.now()
@@ -32,7 +46,9 @@ function setLogin(token){
     let dateMomente = Moment()
     //dateMomente.add(15,'minute')
     /* (year,month,day,hour,minute,second) */
-    let expire =   toTimestamp(
+    let expire =   {
+        'token':token,
+        'expire':toTimestamp(
             dateMomente.year(),
             dateMomente.month(),
             dateMomente.day(),
@@ -40,14 +56,12 @@ function setLogin(token){
             dateMomente.minute(),
             dateMomente.second() 
         )
+    }
         
+    expire = sha256(expire)
+
     /* PRECISO VER COMO TRANSFORMAR O JSON PARA SHA256 */
-    localStorage.setItem(TOKEN_APP, JSON.stringify(
-        {
-            'token': token,
-            'expire': expire
-        }
-    ));
+    localStorage.setItem(TOKEN_APP, JSON.stringify(expire));
     //localStorage.setItem('@SuaAplicacao:JWT_TOKEN', 'seutokenjwt');
 }
 
